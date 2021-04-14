@@ -14,17 +14,25 @@
               Whatchu Tryna Do?
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <%= link_to "Create New Article Bro", new_article_path, class: "dropdown-item" %>
+              <% if logged_in? %>
+                <%= link_to "Create New Article Bro", new_article_path, class: "dropdown-item" %>
+              <% end %>
               <%= link_to "View Articles", articles_path, class: "dropdown-item" %>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </li>
           <% if logged_in? %>
-            <li class="nav-item">
-              <%= link_to 'Log Out', logout_path, class: "nav-link", method: :delete %>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dat Boi [<%= current_user.username %>]
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <%= link_to "Tryna View Dat Profile?", users_path(current_user), class: "dropdown-item" %>
+                <%= link_to "Tryna Edit Dat Profile", edit_user_path(current_user), class: "dropdown-item" %>
+              </div>
             </li>
             <li class="nav-item">
-              <%= link_to current_user.username, user_path(current_user), class: "nav-link" %>
+                <%= link_to 'Log Out', logout_path, class: "nav-link", method: :delete %>
             </li>
           <% else %>
             <li class="nav-item">
